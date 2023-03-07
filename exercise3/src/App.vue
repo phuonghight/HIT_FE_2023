@@ -7,21 +7,21 @@ const data = [
     fullName: "Bui Viet Hoang",
     phone: "0999999999",
     email: "buiviethoang@gmail.com",
-    gender: "male",
+    gender: "Male",
   },
   {
     id: 2,
     fullName: "Dang Hoang Phuong",
     phone: "0111111111",
     email: "daghoangphuong@gmail.com",
-    gender: "male",
+    gender: "Male",
   },
   {
     id: 3,
     fullName: "Trinh Thu Ha",
     phone: "0222222222",
     email: "trinhthuha@gmail.com",
-    gender: "female",
+    gender: "Female",
   },
   {
     id: 4,
@@ -32,7 +32,7 @@ const data = [
   },
 ];
 const students = reactive(data);
-const hide = ref([false, false, false, false]);
+const isHide = reactive([false, false, false, false]);
 const gender = ref("");
 
 const genderStudents = computed(() =>
@@ -41,7 +41,7 @@ const genderStudents = computed(() =>
     : students.filter((student) => student.gender === gender.value)
 );
 
-const change = (e) => {
+const genderFilter = (e) => {
   const value = e.target.options[e.target.options.selectedIndex].value;
   gender.value = value;
 };
@@ -55,7 +55,7 @@ const change = (e) => {
       <th>Phone</th>
       <th>Email</th>
       <th>
-        <select name="gender" id="gender" @change="change">
+        <select name="gender" id="gender" @change="genderFilter">
           <option value="">Gender</option>
           <option value="male">Male</option>
           <option value="female">Female</option>
@@ -66,12 +66,12 @@ const change = (e) => {
     <tr
       v-for="(student, index) in genderStudents"
       :key="index"
-      :class="{ hidden: hide[index] }"
+      :class="{ hidden: isHide[index] }"
     >
-      <th v-for="(value, key) in student" :key="key">
+      <td v-for="(value, key) in student" :key="key">
         {{ value }}
-      </th>
-      <th><button @click="hide[index] = true">X</button></th>
+      </td>
+      <td><button @click="isHide[index] = true">X</button></td>
     </tr>
   </table>
 </template>
