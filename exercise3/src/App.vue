@@ -41,9 +41,13 @@ const genderStudents = computed(() =>
     : students.filter((student) => student.gender === gender.value)
 );
 
-const genderFilter = (e) => {
-  const value = e.target.options[e.target.options.selectedIndex].value;
+const genderFilter = (value) => {
+  // const value = e.target.options[e.target.options.selectedIndex].value;
   gender.value = value;
+};
+
+const deleteHandeler = (index) => {
+  students.splice(index, 1);
 };
 </script>
 
@@ -55,7 +59,7 @@ const genderFilter = (e) => {
       <th>Phone</th>
       <th>Email</th>
       <th>
-        <select name="gender" id="gender" @change="genderFilter">
+        <select v-model="value" @change="gender = value">
           <option value="">Gender</option>
           <option value="male">Male</option>
           <option value="female">Female</option>
@@ -71,7 +75,7 @@ const genderFilter = (e) => {
       <td v-for="(value, key) in student" :key="key">
         {{ value }}
       </td>
-      <td><button @click="isHide[index] = true">X</button></td>
+      <td><button @click="students.splice(index, 1)">X</button></td>
     </tr>
   </table>
 </template>
