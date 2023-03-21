@@ -40,12 +40,6 @@ const genderStudents = computed(() =>
     ? students
     : students.filter((student) => student.gender === gender.value)
 );
-
-const genderFilter = (value) => {
-  // const value = e.target.options[e.target.options.selectedIndex].value;
-  gender.value = value;
-};
-
 const deleteHandeler = (index) => {
   students.splice(index, 1);
 };
@@ -59,7 +53,7 @@ const deleteHandeler = (index) => {
       <th>Phone</th>
       <th>Email</th>
       <th>
-        <select v-model="value" @change="gender = value">
+        <select v-model="gender">
           <option value="">Gender</option>
           <option value="male">Male</option>
           <option value="female">Female</option>
